@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.22.1 (2025-09-05)
+
+Full Changelog: [v0.22.0...v0.22.1](https://github.com/openai/openai-ruby/compare/v0.22.0...v0.22.1)
+
+### Bug Fixes
+
+* use APIStatusError.for instead of APIError.for in stream.rb ([#194](https://github.com/openai/openai-ruby/issues/194)) ([275e19b](https://github.com/openai/openai-ruby/commit/275e19b7d83237431e2f67190d5a3c45fc359610))
+* use correct error class when raising errors from within streams ([271d805](https://github.com/openai/openai-ruby/commit/271d805d07594bd52ffea841429a1a309ba7a8b6))
+
 ## 0.22.0 (2025-09-03)
 
 Full Changelog: [v0.21.1...v0.22.0](https://github.com/openai/openai-ruby/compare/v0.21.1...v0.22.0)
