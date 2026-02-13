@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.49.0 (2026-02-13)
+
+Full Changelog: [v0.48.0...v0.49.0](https://github.com/openai/openai-ruby/compare/v0.48.0...v0.49.0)
+
+### Features
+
+* **api:** container network_policy and skills ([0bad2bd](https://github.com/openai/openai-ruby/commit/0bad2bdedc9c940829297d093c1b891f96a14510))
+
+
+### Documentation
+
+* update comment ([b4f6392](https://github.com/openai/openai-ruby/commit/b4f639284210e2b4f3aa55b515b7914d6b78d78e))
+
 ## 0.48.0 (2026-02-10)
 
 Full Changelog: [v0.47.0...v0.48.0](https://github.com/openai/openai-ruby/compare/v0.47.0...v0.48.0)
