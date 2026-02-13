@@ -19,7 +19,8 @@ class OpenAI::Test::Resources::ContainersTest < OpenAI::Test::ResourceTest
         status: String,
         expires_after: OpenAI::Models::ContainerCreateResponse::ExpiresAfter | nil,
         last_active_at: Integer | nil,
-        memory_limit: OpenAI::Models::ContainerCreateResponse::MemoryLimit | nil
+        memory_limit: OpenAI::Models::ContainerCreateResponse::MemoryLimit | nil,
+        network_policy: OpenAI::Models::ContainerCreateResponse::NetworkPolicy | nil
       }
     end
   end
@@ -40,7 +41,8 @@ class OpenAI::Test::Resources::ContainersTest < OpenAI::Test::ResourceTest
         status: String,
         expires_after: OpenAI::Models::ContainerRetrieveResponse::ExpiresAfter | nil,
         last_active_at: Integer | nil,
-        memory_limit: OpenAI::Models::ContainerRetrieveResponse::MemoryLimit | nil
+        memory_limit: OpenAI::Models::ContainerRetrieveResponse::MemoryLimit | nil,
+        network_policy: OpenAI::Models::ContainerRetrieveResponse::NetworkPolicy | nil
       }
     end
   end
@@ -68,7 +70,8 @@ class OpenAI::Test::Resources::ContainersTest < OpenAI::Test::ResourceTest
         status: String,
         expires_after: OpenAI::Models::ContainerListResponse::ExpiresAfter | nil,
         last_active_at: Integer | nil,
-        memory_limit: OpenAI::Models::ContainerListResponse::MemoryLimit | nil
+        memory_limit: OpenAI::Models::ContainerListResponse::MemoryLimit | nil,
+        network_policy: OpenAI::Models::ContainerListResponse::NetworkPolicy | nil
       }
     end
   end

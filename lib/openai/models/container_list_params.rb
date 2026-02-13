@@ -23,6 +23,12 @@ module OpenAI
       #   @return [Integer, nil]
       optional :limit, Integer
 
+      # @!attribute name
+      #   Filter results by container name.
+      #
+      #   @return [String, nil]
+      optional :name, String
+
       # @!attribute order
       #   Sort order by the `created_at` timestamp of the objects. `asc` for ascending
       #   order and `desc` for descending order.
@@ -30,13 +36,15 @@ module OpenAI
       #   @return [Symbol, OpenAI::Models::ContainerListParams::Order, nil]
       optional :order, enum: -> { OpenAI::ContainerListParams::Order }
 
-      # @!method initialize(after: nil, limit: nil, order: nil, request_options: {})
+      # @!method initialize(after: nil, limit: nil, name: nil, order: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {OpenAI::Models::ContainerListParams} for more details.
       #
       #   @param after [String] A cursor for use in pagination. `after` is an object ID that defines your place
       #
       #   @param limit [Integer] A limit on the number of objects to be returned. Limit can range between 1 and 1
+      #
+      #   @param name [String] Filter results by container name.
       #
       #   @param order [Symbol, OpenAI::Models::ContainerListParams::Order] Sort order by the `created_at` timestamp of the objects. `asc` for ascending ord
       #

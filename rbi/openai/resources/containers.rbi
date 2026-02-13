@@ -13,6 +13,18 @@ module OpenAI
           expires_after: OpenAI::ContainerCreateParams::ExpiresAfter::OrHash,
           file_ids: T::Array[String],
           memory_limit: OpenAI::ContainerCreateParams::MemoryLimit::OrSymbol,
+          network_policy:
+            T.any(
+              OpenAI::Responses::ContainerNetworkPolicyDisabled::OrHash,
+              OpenAI::Responses::ContainerNetworkPolicyAllowlist::OrHash
+            ),
+          skills:
+            T::Array[
+              T.any(
+                OpenAI::Responses::SkillReference::OrHash,
+                OpenAI::Responses::InlineSkill::OrHash
+              )
+            ],
           request_options: OpenAI::RequestOptions::OrHash
         ).returns(OpenAI::Models::ContainerCreateResponse)
       end
@@ -25,6 +37,10 @@ module OpenAI
         file_ids: nil,
         # Optional memory limit for the container. Defaults to "1g".
         memory_limit: nil,
+        # Network access policy for the container.
+        network_policy: nil,
+        # An optional list of skills referenced by id or inline data.
+        skills: nil,
         request_options: {}
       )
       end
@@ -44,6 +60,7 @@ module OpenAI
         params(
           after: String,
           limit: Integer,
+          name: String,
           order: OpenAI::ContainerListParams::Order::OrSymbol,
           request_options: OpenAI::RequestOptions::OrHash
         ).returns(
@@ -59,6 +76,8 @@ module OpenAI
         # A limit on the number of objects to be returned. Limit can range between 1 and
         # 100, and the default is 20.
         limit: nil,
+        # Filter results by container name.
+        name: nil,
         # Sort order by the `created_at` timestamp of the objects. `asc` for ascending
         # order and `desc` for descending order.
         order: nil,

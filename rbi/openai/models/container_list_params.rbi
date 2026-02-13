@@ -29,6 +29,13 @@ module OpenAI
       sig { params(limit: Integer).void }
       attr_writer :limit
 
+      # Filter results by container name.
+      sig { returns(T.nilable(String)) }
+      attr_reader :name
+
+      sig { params(name: String).void }
+      attr_writer :name
+
       # Sort order by the `created_at` timestamp of the objects. `asc` for ascending
       # order and `desc` for descending order.
       sig { returns(T.nilable(OpenAI::ContainerListParams::Order::OrSymbol)) }
@@ -41,6 +48,7 @@ module OpenAI
         params(
           after: String,
           limit: Integer,
+          name: String,
           order: OpenAI::ContainerListParams::Order::OrSymbol,
           request_options: OpenAI::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -54,6 +62,8 @@ module OpenAI
         # A limit on the number of objects to be returned. Limit can range between 1 and
         # 100, and the default is 20.
         limit: nil,
+        # Filter results by container name.
+        name: nil,
         # Sort order by the `created_at` timestamp of the objects. `asc` for ascending
         # order and `desc` for descending order.
         order: nil,
@@ -66,6 +76,7 @@ module OpenAI
           {
             after: String,
             limit: Integer,
+            name: String,
             order: OpenAI::ContainerListParams::Order::OrSymbol,
             request_options: OpenAI::RequestOptions
           }
