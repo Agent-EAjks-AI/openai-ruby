@@ -54,7 +54,13 @@ module OpenAI
       #   @return [Symbol, OpenAI::Models::ContainerRetrieveResponse::MemoryLimit, nil]
       optional :memory_limit, enum: -> { OpenAI::Models::ContainerRetrieveResponse::MemoryLimit }
 
-      # @!method initialize(id:, created_at:, name:, object:, status:, expires_after: nil, last_active_at: nil, memory_limit: nil)
+      # @!attribute network_policy
+      #   Network access policy for the container.
+      #
+      #   @return [OpenAI::Models::ContainerRetrieveResponse::NetworkPolicy, nil]
+      optional :network_policy, -> { OpenAI::Models::ContainerRetrieveResponse::NetworkPolicy }
+
+      # @!method initialize(id:, created_at:, name:, object:, status:, expires_after: nil, last_active_at: nil, memory_limit: nil, network_policy: nil)
       #   Some parameter documentations has been truncated, see
       #   {OpenAI::Models::ContainerRetrieveResponse} for more details.
       #
@@ -73,6 +79,8 @@ module OpenAI
       #   @param last_active_at [Integer] Unix timestamp (in seconds) when the container was last active.
       #
       #   @param memory_limit [Symbol, OpenAI::Models::ContainerRetrieveResponse::MemoryLimit] The memory limit configured for the container.
+      #
+      #   @param network_policy [OpenAI::Models::ContainerRetrieveResponse::NetworkPolicy] Network access policy for the container.
 
       # @see OpenAI::Models::ContainerRetrieveResponse#expires_after
       class ExpiresAfter < OpenAI::Internal::Type::BaseModel
@@ -123,6 +131,41 @@ module OpenAI
 
         # @!method self.values
         #   @return [Array<Symbol>]
+      end
+
+      # @see OpenAI::Models::ContainerRetrieveResponse#network_policy
+      class NetworkPolicy < OpenAI::Internal::Type::BaseModel
+        # @!attribute type
+        #   The network policy mode.
+        #
+        #   @return [Symbol, OpenAI::Models::ContainerRetrieveResponse::NetworkPolicy::Type]
+        required :type, enum: -> { OpenAI::Models::ContainerRetrieveResponse::NetworkPolicy::Type }
+
+        # @!attribute allowed_domains
+        #   Allowed outbound domains when `type` is `allowlist`.
+        #
+        #   @return [Array<String>, nil]
+        optional :allowed_domains, OpenAI::Internal::Type::ArrayOf[String]
+
+        # @!method initialize(type:, allowed_domains: nil)
+        #   Network access policy for the container.
+        #
+        #   @param type [Symbol, OpenAI::Models::ContainerRetrieveResponse::NetworkPolicy::Type] The network policy mode.
+        #
+        #   @param allowed_domains [Array<String>] Allowed outbound domains when `type` is `allowlist`.
+
+        # The network policy mode.
+        #
+        # @see OpenAI::Models::ContainerRetrieveResponse::NetworkPolicy#type
+        module Type
+          extend OpenAI::Internal::Type::Enum
+
+          ALLOWLIST = :allowlist
+          DISABLED = :disabled
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
   end

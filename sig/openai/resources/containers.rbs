@@ -8,6 +8,8 @@ module OpenAI
         ?expires_after: OpenAI::ContainerCreateParams::ExpiresAfter,
         ?file_ids: ::Array[String],
         ?memory_limit: OpenAI::Models::ContainerCreateParams::memory_limit,
+        ?network_policy: OpenAI::Models::ContainerCreateParams::network_policy,
+        ?skills: ::Array[OpenAI::Models::ContainerCreateParams::skill],
         ?request_options: OpenAI::request_opts
       ) -> OpenAI::Models::ContainerCreateResponse
 
@@ -19,6 +21,7 @@ module OpenAI
       def list: (
         ?after: String,
         ?limit: Integer,
+        ?name: String,
         ?order: OpenAI::Models::ContainerListParams::order,
         ?request_options: OpenAI::request_opts
       ) -> OpenAI::Internal::CursorPage[OpenAI::Models::ContainerListResponse]

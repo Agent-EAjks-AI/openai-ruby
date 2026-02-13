@@ -5,7 +5,9 @@ module OpenAI
         name: String,
         expires_after: OpenAI::ContainerCreateParams::ExpiresAfter,
         file_ids: ::Array[String],
-        memory_limit: OpenAI::Models::ContainerCreateParams::memory_limit
+        memory_limit: OpenAI::Models::ContainerCreateParams::memory_limit,
+        network_policy: OpenAI::Models::ContainerCreateParams::network_policy,
+        skills: ::Array[OpenAI::Models::ContainerCreateParams::skill]
       }
       & OpenAI::Internal::Type::request_parameters
 
@@ -31,11 +33,25 @@ module OpenAI
         OpenAI::Models::ContainerCreateParams::memory_limit
       ) -> OpenAI::Models::ContainerCreateParams::memory_limit
 
+      attr_reader network_policy: OpenAI::Models::ContainerCreateParams::network_policy?
+
+      def network_policy=: (
+        OpenAI::Models::ContainerCreateParams::network_policy
+      ) -> OpenAI::Models::ContainerCreateParams::network_policy
+
+      attr_reader skills: ::Array[OpenAI::Models::ContainerCreateParams::skill]?
+
+      def skills=: (
+        ::Array[OpenAI::Models::ContainerCreateParams::skill]
+      ) -> ::Array[OpenAI::Models::ContainerCreateParams::skill]
+
       def initialize: (
         name: String,
         ?expires_after: OpenAI::ContainerCreateParams::ExpiresAfter,
         ?file_ids: ::Array[String],
         ?memory_limit: OpenAI::Models::ContainerCreateParams::memory_limit,
+        ?network_policy: OpenAI::Models::ContainerCreateParams::network_policy,
+        ?skills: ::Array[OpenAI::Models::ContainerCreateParams::skill],
         ?request_options: OpenAI::request_opts
       ) -> void
 
@@ -44,6 +60,8 @@ module OpenAI
         expires_after: OpenAI::ContainerCreateParams::ExpiresAfter,
         file_ids: ::Array[String],
         memory_limit: OpenAI::Models::ContainerCreateParams::memory_limit,
+        network_policy: OpenAI::Models::ContainerCreateParams::network_policy,
+        skills: ::Array[OpenAI::Models::ContainerCreateParams::skill],
         request_options: OpenAI::RequestOptions
       }
 
@@ -90,6 +108,25 @@ module OpenAI
         MEMORY_LIMIT_64G: :"64g"
 
         def self?.values: -> ::Array[OpenAI::Models::ContainerCreateParams::memory_limit]
+      end
+
+      type network_policy =
+        OpenAI::Responses::ContainerNetworkPolicyDisabled
+        | OpenAI::Responses::ContainerNetworkPolicyAllowlist
+
+      module NetworkPolicy
+        extend OpenAI::Internal::Type::Union
+
+        def self?.variants: -> ::Array[OpenAI::Models::ContainerCreateParams::network_policy]
+      end
+
+      type skill =
+        OpenAI::Responses::SkillReference | OpenAI::Responses::InlineSkill
+
+      module Skill
+        extend OpenAI::Internal::Type::Union
+
+        def self?.variants: -> ::Array[OpenAI::Models::ContainerCreateParams::skill]
       end
     end
   end

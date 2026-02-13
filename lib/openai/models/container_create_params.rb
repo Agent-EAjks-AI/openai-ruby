@@ -31,7 +31,19 @@ module OpenAI
       #   @return [Symbol, OpenAI::Models::ContainerCreateParams::MemoryLimit, nil]
       optional :memory_limit, enum: -> { OpenAI::ContainerCreateParams::MemoryLimit }
 
-      # @!method initialize(name:, expires_after: nil, file_ids: nil, memory_limit: nil, request_options: {})
+      # @!attribute network_policy
+      #   Network access policy for the container.
+      #
+      #   @return [OpenAI::Models::Responses::ContainerNetworkPolicyDisabled, OpenAI::Models::Responses::ContainerNetworkPolicyAllowlist, nil]
+      optional :network_policy, union: -> { OpenAI::ContainerCreateParams::NetworkPolicy }
+
+      # @!attribute skills
+      #   An optional list of skills referenced by id or inline data.
+      #
+      #   @return [Array<OpenAI::Models::Responses::SkillReference, OpenAI::Models::Responses::InlineSkill>, nil]
+      optional :skills, -> { OpenAI::Internal::Type::ArrayOf[union: OpenAI::ContainerCreateParams::Skill] }
+
+      # @!method initialize(name:, expires_after: nil, file_ids: nil, memory_limit: nil, network_policy: nil, skills: nil, request_options: {})
       #   @param name [String] Name of the container to create.
       #
       #   @param expires_after [OpenAI::Models::ContainerCreateParams::ExpiresAfter] Container expiration time in seconds relative to the 'anchor' time.
@@ -39,6 +51,10 @@ module OpenAI
       #   @param file_ids [Array<String>] IDs of files to copy to the container.
       #
       #   @param memory_limit [Symbol, OpenAI::Models::ContainerCreateParams::MemoryLimit] Optional memory limit for the container. Defaults to "1g".
+      #
+      #   @param network_policy [OpenAI::Models::Responses::ContainerNetworkPolicyDisabled, OpenAI::Models::Responses::ContainerNetworkPolicyAllowlist] Network access policy for the container.
+      #
+      #   @param skills [Array<OpenAI::Models::Responses::SkillReference, OpenAI::Models::Responses::InlineSkill>] An optional list of skills referenced by id or inline data.
       #
       #   @param request_options [OpenAI::RequestOptions, Hash{Symbol=>Object}]
 
@@ -90,6 +106,33 @@ module OpenAI
 
         # @!method self.values
         #   @return [Array<Symbol>]
+      end
+
+      # Network access policy for the container.
+      module NetworkPolicy
+        extend OpenAI::Internal::Type::Union
+
+        discriminator :type
+
+        variant :disabled, -> { OpenAI::Responses::ContainerNetworkPolicyDisabled }
+
+        variant :allowlist, -> { OpenAI::Responses::ContainerNetworkPolicyAllowlist }
+
+        # @!method self.variants
+        #   @return [Array(OpenAI::Models::Responses::ContainerNetworkPolicyDisabled, OpenAI::Models::Responses::ContainerNetworkPolicyAllowlist)]
+      end
+
+      module Skill
+        extend OpenAI::Internal::Type::Union
+
+        discriminator :type
+
+        variant :skill_reference, -> { OpenAI::Responses::SkillReference }
+
+        variant :inline, -> { OpenAI::Responses::InlineSkill }
+
+        # @!method self.variants
+        #   @return [Array(OpenAI::Models::Responses::SkillReference, OpenAI::Models::Responses::InlineSkill)]
       end
     end
   end
