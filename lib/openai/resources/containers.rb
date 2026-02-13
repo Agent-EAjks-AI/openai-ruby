@@ -8,7 +8,7 @@ module OpenAI
 
       # Create Container
       #
-      # @overload create(name:, expires_after: nil, file_ids: nil, memory_limit: nil, request_options: {})
+      # @overload create(name:, expires_after: nil, file_ids: nil, memory_limit: nil, network_policy: nil, skills: nil, request_options: {})
       #
       # @param name [String] Name of the container to create.
       #
@@ -17,6 +17,10 @@ module OpenAI
       # @param file_ids [Array<String>] IDs of files to copy to the container.
       #
       # @param memory_limit [Symbol, OpenAI::Models::ContainerCreateParams::MemoryLimit] Optional memory limit for the container. Defaults to "1g".
+      #
+      # @param network_policy [OpenAI::Models::Responses::ContainerNetworkPolicyDisabled, OpenAI::Models::Responses::ContainerNetworkPolicyAllowlist] Network access policy for the container.
+      #
+      # @param skills [Array<OpenAI::Models::Responses::SkillReference, OpenAI::Models::Responses::InlineSkill>] An optional list of skills referenced by id or inline data.
       #
       # @param request_options [OpenAI::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -58,11 +62,13 @@ module OpenAI
       #
       # List Containers
       #
-      # @overload list(after: nil, limit: nil, order: nil, request_options: {})
+      # @overload list(after: nil, limit: nil, name: nil, order: nil, request_options: {})
       #
       # @param after [String] A cursor for use in pagination. `after` is an object ID that defines your place
       #
       # @param limit [Integer] A limit on the number of objects to be returned. Limit can range between 1 and 1
+      #
+      # @param name [String] Filter results by container name.
       #
       # @param order [Symbol, OpenAI::Models::ContainerListParams::Order] Sort order by the `created_at` timestamp of the objects. `asc` for ascending ord
       #

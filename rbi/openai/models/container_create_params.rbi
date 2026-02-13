@@ -46,12 +46,76 @@ module OpenAI
       end
       attr_writer :memory_limit
 
+      # Network access policy for the container.
+      sig do
+        returns(
+          T.nilable(
+            T.any(
+              OpenAI::Responses::ContainerNetworkPolicyDisabled,
+              OpenAI::Responses::ContainerNetworkPolicyAllowlist
+            )
+          )
+        )
+      end
+      attr_reader :network_policy
+
+      sig do
+        params(
+          network_policy:
+            T.any(
+              OpenAI::Responses::ContainerNetworkPolicyDisabled::OrHash,
+              OpenAI::Responses::ContainerNetworkPolicyAllowlist::OrHash
+            )
+        ).void
+      end
+      attr_writer :network_policy
+
+      # An optional list of skills referenced by id or inline data.
+      sig do
+        returns(
+          T.nilable(
+            T::Array[
+              T.any(
+                OpenAI::Responses::SkillReference,
+                OpenAI::Responses::InlineSkill
+              )
+            ]
+          )
+        )
+      end
+      attr_reader :skills
+
+      sig do
+        params(
+          skills:
+            T::Array[
+              T.any(
+                OpenAI::Responses::SkillReference::OrHash,
+                OpenAI::Responses::InlineSkill::OrHash
+              )
+            ]
+        ).void
+      end
+      attr_writer :skills
+
       sig do
         params(
           name: String,
           expires_after: OpenAI::ContainerCreateParams::ExpiresAfter::OrHash,
           file_ids: T::Array[String],
           memory_limit: OpenAI::ContainerCreateParams::MemoryLimit::OrSymbol,
+          network_policy:
+            T.any(
+              OpenAI::Responses::ContainerNetworkPolicyDisabled::OrHash,
+              OpenAI::Responses::ContainerNetworkPolicyAllowlist::OrHash
+            ),
+          skills:
+            T::Array[
+              T.any(
+                OpenAI::Responses::SkillReference::OrHash,
+                OpenAI::Responses::InlineSkill::OrHash
+              )
+            ],
           request_options: OpenAI::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -64,6 +128,10 @@ module OpenAI
         file_ids: nil,
         # Optional memory limit for the container. Defaults to "1g".
         memory_limit: nil,
+        # Network access policy for the container.
+        network_policy: nil,
+        # An optional list of skills referenced by id or inline data.
+        skills: nil,
         request_options: {}
       )
       end
@@ -75,6 +143,18 @@ module OpenAI
             expires_after: OpenAI::ContainerCreateParams::ExpiresAfter,
             file_ids: T::Array[String],
             memory_limit: OpenAI::ContainerCreateParams::MemoryLimit::OrSymbol,
+            network_policy:
+              T.any(
+                OpenAI::Responses::ContainerNetworkPolicyDisabled,
+                OpenAI::Responses::ContainerNetworkPolicyAllowlist
+              ),
+            skills:
+              T::Array[
+                T.any(
+                  OpenAI::Responses::SkillReference,
+                  OpenAI::Responses::InlineSkill
+                )
+              ],
             request_options: OpenAI::RequestOptions
           }
         )
@@ -189,6 +269,47 @@ module OpenAI
           )
         end
         def self.values
+        end
+      end
+
+      # Network access policy for the container.
+      module NetworkPolicy
+        extend OpenAI::Internal::Type::Union
+
+        Variants =
+          T.type_alias do
+            T.any(
+              OpenAI::Responses::ContainerNetworkPolicyDisabled,
+              OpenAI::Responses::ContainerNetworkPolicyAllowlist
+            )
+          end
+
+        sig do
+          override.returns(
+            T::Array[OpenAI::ContainerCreateParams::NetworkPolicy::Variants]
+          )
+        end
+        def self.variants
+        end
+      end
+
+      module Skill
+        extend OpenAI::Internal::Type::Union
+
+        Variants =
+          T.type_alias do
+            T.any(
+              OpenAI::Responses::SkillReference,
+              OpenAI::Responses::InlineSkill
+            )
+          end
+
+        sig do
+          override.returns(
+            T::Array[OpenAI::ContainerCreateParams::Skill::Variants]
+          )
+        end
+        def self.variants
         end
       end
     end
