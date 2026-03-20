@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.56.1 (2026-03-20)
+
+Full Changelog: [v0.56.0...v0.56.1](https://github.com/openai/openai-ruby/compare/v0.56.0...v0.56.1)
+
+### Chores
+
+* **tests:** bump steady to v0.19.4 ([8cb70d7](https://github.com/openai/openai-ruby/commit/8cb70d74617b096ff0e83effe17c4a8bbe79b7fc))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([9907cd8](https://github.com/openai/openai-ruby/commit/9907cd82b3dcee2823c821ed89c80aab2bed0d40))
+
 ## 0.56.0 (2026-03-17)
 
 Full Changelog: [v0.55.0...v0.56.0](https://github.com/openai/openai-ruby/compare/v0.55.0...v0.56.0)
