@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.57.1 (2026-03-28)
+
+Full Changelog: [v0.57.0...v0.57.1](https://github.com/openai/openai-ruby/compare/v0.57.0...v0.57.1)
+
+### Bug Fixes
+
+* **api:** remove web_search_call.results from ResponseIncludable enum ([2861387](https://github.com/openai/openai-ruby/commit/2861387a6f43db7d7e7cc703022b0093b27723b9))
+* **internal:** correct multipart form field name encoding ([683d14b](https://github.com/openai/openai-ruby/commit/683d14b37f2b57d5273fbb5ed1e5c6d2aea20f4d))
+
+
+### Chores
+
+* **ci:** support opting out of skipping builds on metadata-only commits ([1b6ddfa](https://github.com/openai/openai-ruby/commit/1b6ddfa633228b299115e84918be246ec60e95d8))
+
+
+### Documentation
+
+* **api:** update file parameter descriptions in vector_stores ([260e754](https://github.com/openai/openai-ruby/commit/260e754f501203b1a4e7c17a2ace1642b5194d52))
+
 ## 0.57.0 (2026-03-25)
 
 Full Changelog: [v0.56.0...v0.57.0](https://github.com/openai/openai-ruby/compare/v0.56.0...v0.57.0)
